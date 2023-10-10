@@ -1,12 +1,28 @@
+import { puppyList }   from "./data"
+import { useState } from "react"
+import React from "react";
+ function App() {
 
-
-function App() {
- 
-
-  return (
-    <>
-      
-    </>
+const [puppies, setPuppies] = useState(puppyList)
+const [featPupId, setFeatPupId] = useState(null)
+const featuredPup = puppies.find((pup)=> pup.id === featPupId)
+console.log(featuredPup);
+return (
+    <div>
+    {
+      puppies.map((puppy) => {
+        return <p onClick={()=>{setFeatPupId(puppy.id)}} key={puppy.id}>{puppy.name}</p>;
+      })
+    
+    }{featPupId && (
+    <div>
+      <h2>{ featuredPup.name }</h2>
+      <ul>
+        <li>Age: {featuredPup.age}</li>
+        <li>Email: {featuredPup.email}</li>
+        </ul></div>
+  )}      
+    </div>
   )
 }
 
